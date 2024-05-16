@@ -1,28 +1,55 @@
 <template>
     <div>
-        <div class="flex flex-col space-y-5 w-auto h-auto items-center justify-start">
+        <div class="flex flex-col space-y-5 w-auto h-auto items-start justify-start">
             <div class="space-y-2">
-                <div class="space-y-2">
-                    <div class=""><i class="bi bi-arrow-through-heart-fill text-2xl"></i></div>
-                    <div class="container bg-slate-100 p-5 rounded-2xl w-max">
-                        <div class="container">hello</div>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <div class=""><i class="bi bi-robot text-2xl"></i></div>
-                    <div class="container bg-slate-100 p-5 rounded-2xl w-full">
-                        <div class="container">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores eaque nisi
-                            totam iusto perspiciatis voluptatum deleniti incidunt laudantium, porro minima ut repellat quis
-                            harum officiis nobis assumenda molestias voluptates quos?</div>
-                    </div>
-                </div>
+                <MessageItem v-for="msg in conversation" :message="msg.message" :is_user="msg.isUser"></MessageItem>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { ref, reactive, nextTick } from 'vue';
+import MessageItem from './MessageItem.vue';
+const conversation = ref([]);
+const chatResponse = (messageContainer, question) => {
+    messageContainer.value = "";
+    const eventSource = new EventSource('http://127.0.0.1:5000/reader/answer?msg=' + question); // 建立与服务器的EventSource连接
+    eventSource.onmessage = async function (event) {
+        const data = JSON.parse(event.data);
+        console.log(data)
+        const result = data.body.result.trim();
+        messageContainer.value += result;
+        if (data.body.is_end == true) {
+            eventSource.close();
+        }
+        await nextTick();
+        const contentShow = document.getElementById('content-show');
+        contentShow.scrollTop = contentShow.scrollHeight;
+    };
+}
 
+const sendQuestion = async (question) => {
+    const flowMessage = ref("Please wait a moment...");
+    conversation.value.push({ message: question, isUser: true });
+    const item = reactive({
+        message: flowMessage,
+        is_user: false,
+        file: "",
+        image: "",
+        is_received: false,
+        avatar: "bi bi-robot"
+    });
+    conversation.value.push(item);
+    await nextTick();
+    const contentShow = document.getElementById('content-show');
+    contentShow.scrollTop = contentShow.scrollHeight;
+    chatResponse(flowMessage, question);
+}
+
+defineExpose({
+    sendQuestion
+})
 </script>
 
 <style scoped></style>

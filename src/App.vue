@@ -3,19 +3,24 @@
 import ChatInput from './views/ChatInput.vue';
 import ChatMain from './views/ChatMain.vue';
 import ChatSide from './views/ChatSide.vue';
+import sendQuestion from './views/ChatMain.vue';
+import { ref } from 'vue';
+const chatMain = ref(null);
+function sendMessage(message){
+    chatMain.value.sendQuestion(message);
+}
 </script>
-
 <template>
     <div class="bg-white">
         <div class="container mx-auto flex flex-row h-screen font-serif">
             <ChatSide />
             <div class="h-screen w-[85%] flex flex-col">
-                <div class="h-[90%]">
-                    <div class="mx-32 mt-10 mb-2">
-                        <ChatMain />
+                <div class="h-[90%] overflow-y-auto scroll-smooth" id="content-show">
+                    <div class="mx-32 mt-10">
+                        <ChatMain ref="chatMain"/>
                     </div>
                 </div>
-                <ChatInput />
+                <ChatInput @send-message="sendMessage"/>
             </div>
         </div>
     </div>

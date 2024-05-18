@@ -28,8 +28,11 @@
 import { ref } from 'vue';
 
 const inputValue = ref('');
-const emit = defineEmits(['send-message'])
+const emit = defineEmits(['send-message','load-file'])
 
+function loadFile() {
+    emit('load-file');
+}
 function sendMessage() {
     emit('send-message', inputValue.value);
     inputValue.value = '';

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="flex flex-col space-y-5 w-auto h-auto items-start justify-start">
+        <div><TopBar ref="topBar"></TopBar></div>
+        <div class="mx-32 flex flex-col space-y-5 w-auto h-auto items-start justify-start">
             <div class="space-y-2">
                 <MessageItem v-for="msg in conversation" :message="msg.message" :is_user="msg.isUser"></MessageItem>
             </div>
@@ -11,6 +12,7 @@
 <script setup>
 import { ref, reactive, nextTick, watchEffect, watch } from 'vue';
 import MessageItem from './MessageItem.vue';
+import TopBar from './TopBar.vue';
 const conversation = ref([]);
 conversation.value = [
     { message: "Hello", isUser: true },
@@ -22,7 +24,9 @@ conversation.value = [
     { message: "Of course! I'm an expert in Vue. What do you need help with?", isUser: false }
 ];
 let offset = 0;
+const selectedFile = ref(null);
 const sessionId = ref(null);
+const topBar = ref(null);
 const chatResponse = (messageContainer, question) => {
     messageContainer.value = "";
     const eventSource = new EventSource('http://127.0.0.1:5000/reader/answer?msg=' + question); // 建立与服务器的EventSource连接
@@ -70,11 +74,9 @@ const changeHistory = (propSessionId) => {
     //发送请求，获取历史记录，建立连接，更新conversation
 
 }
-const loadFile = () => {
-    //弹出系统文件选择框，选择文件后发送文件，同时保存文件类型
-
-    
-
+const loadFile = async(file) => {
+    selectedFile.value = file;
+    topBar.value.setUploadFile(file.name);
 }
 defineExpose({
     sendQuestion, addChat,changeHistory,loadFile

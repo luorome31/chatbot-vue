@@ -1,9 +1,11 @@
 <template>
     <div class="h-[10%] mx-32 my-2 rounded-lg">
+
         <div class="bg-slate-100 rounded-xl shadow-md w-auto p-3 flex">
             <div class="text-gray-600 p-3 w-20 justify-center flex">
-                <button>
+                <button @click="openFileSelector">
                     <i class="bi bi-file-earmark-arrow-up-fill text-3xl"></i>
+                    <input id="loadInput" type="file" @change="loadFile" class="hidden" />
                 </button>
             </div>
 
@@ -26,17 +28,24 @@
 
 <script setup>
 import { ref } from 'vue';
-
-const inputValue = ref('');
+const loadInput = ref(null);
+const inputValue = document.getElementById('loadInput');
 const emit = defineEmits(['send-message','load-file'])
-
-function loadFile() {
+const selectedFile = ref(null);
+const openFileSelector = () => {
+    const input = document.getElementById('loadInput');
+    input.click();
+};
+const loadFile = (e) => {
+    const file = e.target.files[0];
+    selectedFile.value = file;
     emit('load-file');
-}
+};
 function sendMessage() {
     emit('send-message', inputValue.value);
     inputValue.value = '';
 }
+defineExpose({selectedFile});
 </script>
 
 <style lang="scss" scoped></style>

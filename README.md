@@ -2,6 +2,6 @@
 A chatbot project to practice using Tailwind CSS.
 Also prepare for computer networking coursework
 ---
-![Image Description](/src/assets/image2.png)
+![Image Description](/src/assets/image3.png)
 
 

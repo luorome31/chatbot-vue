@@ -10,10 +10,11 @@
       </button>
     </div>
 
-    <div v-if="isOpen" class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+    <div v-if="isOpen" class=" font-mono origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
       <div class="py-1">
         <a v-for="option in options" :key="option.value" @click="selectOption(option)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
-          {{ option.label }}
+          <i class="bi bi-arrow-right-square-fill mr-2"></i>
+           {{ option.label }}
         </a>
       </div>
     </div>

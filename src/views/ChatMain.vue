@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div><TopBar ref="topBar"></TopBar></div>
+        <div><TopBar ref="topBar" @model-change="modelChange" @plugin-change="pluginChange"></TopBar></div>
         <div class="mx-32 flex flex-col space-y-5 w-auto h-auto items-start justify-start">
             <div class="space-y-2">
                 <MessageItem v-for="msg in conversation" :message="msg.message" :is_user="msg.isUser"></MessageItem>
@@ -13,7 +13,17 @@
 import { ref, reactive, nextTick, watchEffect, watch } from 'vue';
 import MessageItem from './MessageItem.vue';
 import TopBar from './TopBar.vue';
+//历史对话记录
 const conversation = ref([]);
+//用户选择的文件、用户输入的消息、模型
+const selectedFile = ref(null);
+const userInput = ref(null);
+const model = ref("GPT-3.5");
+const plugin = ref("");
+//会话Id
+const sessionId = ref(null);
+
+//测试值
 conversation.value = [
     { message: "Hello", isUser: true },
     { message: "Hi there!", isUser: false },
@@ -24,8 +34,7 @@ conversation.value = [
     { message: "Of course! I'm an expert in Vue. What do you need help with?", isUser: false }
 ];
 let offset = 0;
-const selectedFile = ref(null);
-const sessionId = ref(null);
+
 const topBar = ref(null);
 const chatResponse = (messageContainer, question) => {
     messageContainer.value = "";
@@ -46,6 +55,7 @@ const chatResponse = (messageContainer, question) => {
 
 
 const sendQuestion = async (question) => {
+    userInput.value = question;
     const flowMessage = ref("Please wait a moment...");
     conversation.value.push({ message: question, isUser: true });
     const item = reactive({
@@ -76,10 +86,18 @@ const changeHistory = (propSessionId) => {
 }
 const loadFile = async(file) => {
     selectedFile.value = file;
-    topBar.value.setUploadFile(file.name);
+}
+const cancelFile = () => {
+    selectedFile.value = null;
+}
+const modelChange = (value) => {
+    model.value = value;
+}
+const pluginChange = (value) =>{
+    plugin.value = value;
 }
 defineExpose({
-    sendQuestion, addChat,changeHistory,loadFile
+    sendQuestion, addChat,changeHistory,loadFile,cancelFile,
 })
 </script>
 

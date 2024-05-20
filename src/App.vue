@@ -20,6 +20,9 @@ function loadFile() {
     console.log(chatInput.value.selectedFile);
     chatMain.value.loadFile(chatInput.value.selectedFile);
 }
+function cancelFile() {
+    chatMain.value.cancelFile();
+}
 </script>
 <template>
     <div class="bg-white">
@@ -29,7 +32,10 @@ function loadFile() {
                 <div class="h-[90%] overflow-y-auto scroll-smooth" id="content-show">
                     <ChatMain ref="chatMain" />
                 </div>
-                <ChatInput ref="chatInput" @send-message="sendMessage" @load-file="loadFile" />
+                <ChatInput ref="chatInput" 
+                @send-message="sendMessage" 
+                @load-file="loadFile" 
+                @cancel-file="cancelFile"/>
             </div>
         </div>
     </div>

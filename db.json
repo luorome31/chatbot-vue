@@ -1,0 +1,108 @@
+{
+    "session_list":{
+        "code":200,
+        "message":"success",
+        "data":{
+            "session_list":[
+                {
+                    "sessionId":1,
+                    "title":"session1",
+                    "time":"2017-01-01 10:00:00"
+                },
+                {
+                    "sessionId":2,
+                    "title":"session2",
+                    "time":"2017-01-01 11:00:00"
+                },
+                {
+                    "sessionId":3,
+                    "title":"session3",
+                    "time":"2017-01-01 12:00:00"
+                },
+                {
+                    "sessionId":2,
+                    "title":"session2",
+                    "time":"2017-01-01 11:00:00"
+                },
+                {
+                    "sessionId":3,
+                    "title":"session3",
+                    "time":"2017-01-01 12:00:00"
+                },
+                {
+                    "sessionId":2,
+                    "title":"session2",
+                    "time":"2017-01-01 11:00:00"
+                },
+                {
+                    "sessionId":3,
+                    "title":"session3",
+                    "time":"2017-01-01 12:00:00"
+                },
+                {
+                    "sessionId":3,
+                    "title":"session3",
+                    "time":"2017-01-01 12:00:00"
+                },
+                {
+                    "sessionId":2,
+                    "title":"session2",
+                    "time":"2017-01-01 11:00:00"
+                },
+                {
+                    "sessionId":3,
+                    "title":"session3",
+                    "time":"2017-01-01 12:00:00"
+                }
+            ]
+        }
+    },
+    "history_list":{
+        "code":200,
+        "message":"success",
+        "data":{
+            "message_list":[
+                {
+                    "role":true,
+                    "message_block":[{
+                        "type":1,
+                        "content":"hello"
+                    }]
+                },
+                {
+                    "role":false,
+                    "message_block":[{
+                        "type":1,
+                        "content":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet tempora obcaecati alias. Eveniet fugit voluptas ipsam, animi culpa sit nemo tempore officiis blanditiis, ea obcaecati aliquam! Iure odit ipsum aut."
+                    }]
+                },
+                {
+                    "role":true,
+                    "message_block":[{
+                        "type":1,
+                        "content":"hello"
+                    }]
+                },
+                {
+                    "role":false,
+                    "message_block":[{
+                        "type":1,
+                        "content":"robot"
+                    }]
+                }
+            ]
+        }
+    },
+    "chat":{
+        "type":1,
+        "content":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet tempora obcaecati alias. Eveniet fugit voluptas ipsam, animi culpa sit nemo tempore officiis blanditiis, ea obcaecati aliquam! Iure odit ipsum aut.",
+        "isEnd":true
+    },
+    "new_chat":{
+        "sessionId":100,
+        "title":"test",
+        "type":1,
+        "content":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet tempora obcaecati alias. Eveniet fugit voluptas ipsam, animi culpa sit nemo tempore officiis blanditiis, ea obcaecati aliquam! Iure odit ipsum aut.",
+        "isEnd":true
+    }
+}

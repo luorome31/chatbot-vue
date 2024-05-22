@@ -7,11 +7,12 @@ import { ref } from 'vue';
 
 const chatMain = ref(null);
 const chatInput = ref(null);
+const chatSide = ref(null);
 function sendMessage(message) {
     chatMain.value.sendQuestion(message);
 }
-function addChat(sessionId) {
-    chatMain.value.addChat(sessionId);
+function addChat() {
+    chatMain.value.addChat();
 }
 function changeHistory(sessionId) {
     chatMain.value.changeHistory(sessionId);
@@ -23,14 +24,17 @@ function loadFile() {
 function cancelFile() {
     chatMain.value.cancelFile();
 }
+function new_session({title,sessionId}){
+    chatSide.value.addSessionIdAndTitle({title,sessionId});
+}
 </script>
 <template>
     <div class="bg-white">
         <div class="container mx-auto flex flex-row h-screen font-serif">
-            <ChatSide @add-chat="addChat" @change-history="changeHistory" />
+            <ChatSide  ref="chatSide" @add-chat="addChat" @change-history="changeHistory" />
             <div class="h-screen w-[85%]  flex flex-col">
-                <div class="h-[90%] overflow-y-auto scroll-smooth" id="content-show">
-                    <ChatMain ref="chatMain" />
+                <div class="pdfOrder h-[90%] overflow-y-auto scroll-smooth" id="content-show">
+                    <ChatMain ref="chatMain" @new_session="new_session"/>
                 </div>
                 <ChatInput ref="chatInput" 
                 @send-message="sendMessage" 

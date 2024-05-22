@@ -15,7 +15,6 @@ const props = defineProps({
     },
     'sessionId': {
         type: Number,
-        default: 0,
     },
 })
 const title = ref(null);

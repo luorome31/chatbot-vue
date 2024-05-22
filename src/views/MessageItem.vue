@@ -5,6 +5,9 @@
             {{ message }}
             <!-- <slot></slot> -->
         </div>
+        <div v-if="image!==undefined" class="">
+            <img :src=image>
+        </div>
     </div>
 </template>
 
@@ -16,7 +19,7 @@ const is_user = props.is_user;
 const avatar = computed(() => {
     return is_user ? 'bi bi-arrow-through-heart-fill' : 'bi bi-robot';
 });
-
+const image = props.image;
 
 
 

@@ -7,6 +7,7 @@ import './index.css'
 import App from './App.vue'
 import router from './router'
 import "bootstrap-icons/font/bootstrap-icons.css"
+import "jspdf"
 const app = createApp(App)
 
 app.use(createPinia())

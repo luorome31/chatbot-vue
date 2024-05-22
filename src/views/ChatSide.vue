@@ -26,7 +26,7 @@
                 <i class="bi bi-person-circle text-2xl mr-2"></i>
                 My account
             </div>
-            <div @click="getHistoryList"
+            <div
                 class="container w-full h-20 p-2 rounded-lg flex items-center justify-start text-slate-600 hover:cursor-pointer">
                 <i class="bi bi-box-arrow-right text-2xl mr-2"></i>
                 Log out
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref,nextTick } from 'vue';
 import HistoryItem from './HistoryItem.vue';
 import axios from 'axios';
 // import {modifyTitle,modifySessionId} from './HistoryItem.vue'
@@ -73,9 +73,10 @@ onMounted(() => {
     )
 })
 
-const addSessionIdAndTitle = ({title,sessionId})=>{
-    historyItem.value[0].sessionId = sessionId;
+const addSessionIdAndTitle = async({title,session_Id})=>{
+    historyItem.value[0].sessionId = session_Id;
     historyItem.value[0].title = title;
+    await nextTick();
 }
 defineExpose({addSessionIdAndTitle})
 </script>

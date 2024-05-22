@@ -95,7 +95,7 @@
     },
     "chat":{
         "type":1,
-        "content":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet tempora obcaecati alias. Eveniet fugit voluptas ipsam, animi culpa sit nemo tempore officiis blanditiis, ea obcaecati aliquam! Iure odit ipsum aut.",
+        "content":"Loremtempora obcaecati alias. Eveniet fugit voluptas ipsam, animi culpa sit nemo tempore officiis blanditiis, ea obcaecati aliquam! Iure odit ipsum aut.",
         "isEnd":true
     },
     "new_chat":{

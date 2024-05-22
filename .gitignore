@@ -30,3 +30,4 @@ coverage
 
 *.tsbuildinfo
 src/views/development.md
+src/views/ImagePreview.vue

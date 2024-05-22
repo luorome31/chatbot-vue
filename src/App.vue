@@ -24,8 +24,9 @@ function loadFile() {
 function cancelFile() {
     chatMain.value.cancelFile();
 }
-function new_session({title,sessionId}){
-    chatSide.value.addSessionIdAndTitle({title,sessionId});
+function new_session({title,session_Id}){
+    
+    chatSide.value.addSessionIdAndTitle({title,session_Id});
 }
 </script>
 <template>
